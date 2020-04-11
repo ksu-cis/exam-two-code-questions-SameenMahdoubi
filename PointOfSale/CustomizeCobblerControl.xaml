@@ -6,7 +6,39 @@
              xmlns:local="clr-namespace:ExamTwoQuestions.PointOfSale"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock>Customize Cobbler</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="40" Grid.Row="0" HorizontalAlignment="Center">Customize This Cobbler!</TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <CheckBox  IsChecked="{Binding Path=WithIceCream}"></CheckBox>
+            <TextBlock Text="Should this be served with ice cream?" ></TextBlock>
+        </StackPanel>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center">What flavor should it be?</TextBlock>
+        <Grid Grid.Row="3" Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="CherryButton" Click="FillingButtonClicked" Grid.Column="0">Cherry</Button>
+            <Button Name="PeachButton" Click="FillingButtonClicked" Grid.Column="1">Peach</Button>
+            <Button Name="BlueberryButton" Click="FillingButtonClicked" Grid.Column="2">Blueberry</Button>
+        </Grid>
+
+        <TextBlock Grid.Row="4" FontSize="18" HorizontalAlignment="Center" Text="{Binding}"/>
+
     </Grid>
 </UserControl>
+

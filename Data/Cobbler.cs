@@ -1,24 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ExamTwoCodeQuestions.Data
 {
-    public class Cobbler : IOrderItem
+    public class Cobbler : IOrderItem, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Implements the INotifyPropertyChanged interface.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private FruitFilling fruit;
         /// <summary>
         /// The fruit used in the cobbler
         /// </summary>
-        public FruitFilling Fruit { get; set; }
+        public FruitFilling Fruit {
+            get
+            {
+                return fruit;
+                
+            }
+            set
+            {
+                fruit = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Fruit"));                
+            }
+        }
 
+        private bool withIceCream = true;
         /// <summary>
         /// If the cobbler is served with ice cream
         /// </summary>
-        public bool WithIceCream { get; set; } = true;
+        public bool WithIceCream
+        {
+            get
+            {
+                return withIceCream;
+            }
 
-        /// <summary>
-        /// Gets the price of the Cobbler
-        /// </summary>
-        public double Price
+            set
+            {
+                withIceCream = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("WithIceCream"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SpecialInstructions"));
+            }
+        }
+
+/// <summary>
+/// Gets the price of the Cobbler
+/// </summary>
+public double Price
         {
             get
             {
@@ -36,6 +68,26 @@ namespace ExamTwoCodeQuestions.Data
             {
                 if(WithIceCream) { return new List<string>(); }
                 else { return new List<string>() { "Hold Ice Cream" }; }
+            }
+        }
+
+        public override string ToString()
+        {
+            switch (Fruit)
+            {
+                case FruitFilling.Blueberry:
+                    return "Blueberry Cobbler";
+                    break;
+                case FruitFilling.Cherry:
+                    return "Cherry Cobbler";
+                    break;
+                case FruitFilling.Peach:
+                    return "Peach Cobbler";
+                    break;
+                default:
+                    return "Cobbler";
+                    
+
             }
         }
     }

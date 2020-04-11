@@ -1,11 +1,54 @@
 using System;
 using ExamTwoCodeQuestions.Data;
 using Xunit;
+using System.ComponentModel;
 
 namespace ExamTwoCodeQuestions.DataTests
 {
     public class CobblerUnitTests
     {
+        //Placing new unit tests at the top for easy access
+
+        [Fact]
+        public void CobblerShouldImplementINotifyPropertyChanged()
+        {
+            var cobbler = new Cobbler();
+            Assert.IsAssignableFrom<INotifyPropertyChanged>(cobbler);
+        }
+
+        [Fact]
+        public void ChangingFruitPropertyShouldInvokePropertyChangedForFruit()
+        {
+            var cobbler = new Cobbler();
+            Assert.PropertyChanged(cobbler, "Fruit", () => {
+                cobbler.Fruit = FruitFilling.Peach;
+            });
+        }
+
+        [Fact]
+        public void ChangingWithIceCreamPropertyShouldInvokePropertyChangedForWithIceCream()
+        {
+            var cobbler = new Cobbler();
+            Assert.PropertyChanged(cobbler, "WithIceCream", () => {
+                cobbler.WithIceCream = false;
+            });
+        }
+
+        [Fact]
+        public void ChangingWithIceCreamPropertyShouldInvokePropertyChangedForSpecialInstructions()
+        {
+            var cobbler = new Cobbler();
+            Assert.PropertyChanged(cobbler, "SpecialInstructions", () => {
+                cobbler.WithIceCream = false;
+            });
+        }
+
+
+
+
+
+        //END OF NEW UNIT TESTS
+
         [Theory]
         [InlineData(FruitFilling.Cherry)]
         [InlineData(FruitFilling.Blueberry)]

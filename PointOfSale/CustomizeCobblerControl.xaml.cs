@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ExamTwoCodeQuestions.Data;
 
 namespace ExamTwoQuestions.PointOfSale
 {
@@ -21,6 +22,34 @@ namespace ExamTwoQuestions.PointOfSale
         public CustomizeCobblerControl()
         {
             InitializeComponent();
+        }
+
+        public void FillingButtonClicked(object sender, EventArgs e)
+        {
+            if(DataContext is Cobbler)
+            {
+                Cobbler cobbler = (Cobbler)DataContext;
+                if (sender is Button button)
+                {
+                    switch (button.Name)
+                    {
+                        case "CherryButton":
+                            cobbler.Fruit = FruitFilling.Cherry;
+                            break;
+                        case "BlueberryButton":
+                            cobbler.Fruit = FruitFilling.Blueberry;
+                            break;
+                        case "PeachButton":
+                            cobbler.Fruit = FruitFilling.Peach;
+                            break;
+                        default:
+                            throw new NotImplementedException("Unknown flavor selected.");
+                            break;
+                    }
+                }
+            }
+            
+            
         }
     }
 }
